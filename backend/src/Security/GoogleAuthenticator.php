@@ -6,6 +6,7 @@ namespace App\Security;
 
 use App\Entity\RefreshToken;
 use App\Entity\User;
+use App\Event\UserLoggedInEvent;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
@@ -21,6 +22,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Psr\Log\LoggerInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class GoogleAuthenticator extends OAuth2Authenticator
 {
@@ -30,7 +32,8 @@ class GoogleAuthenticator extends OAuth2Authenticator
         private JWTTokenManagerInterface $jwtManager,
         private string $frontendUrl,
         private LoggerInterface $logger,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private EventDispatcherInterface $eventDispatcher
     ) {
     }
 
@@ -77,6 +80,8 @@ class GoogleAuthenticator extends OAuth2Authenticator
         $refresh->setExpiresAt(new \DateTimeImmutable('+1 hours'));
         $this->entityManager->persist($refresh);
         $this->entityManager->flush();
+
+        $this->eventDispatcher->dispatch(new UserLoggedInEvent($user));
 
         $response = new RedirectResponse($this->frontendUrl . '?login=success');
 
