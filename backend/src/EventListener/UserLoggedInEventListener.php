@@ -12,9 +12,10 @@ use Symfony\Component\Mime\Email;
 #[AsEventListener]
 class UserLoggedInEventListener
 {
-    public function __construct(private MailerInterface $mailer) {
-
+    public function __construct(private MailerInterface $mailer)
+    {
     }
+
     public function __invoke(UserLoggedInEvent $event): void
     {
         $user = $event->user;
@@ -24,7 +25,8 @@ class UserLoggedInEventListener
             ->subject('Login notification')
             ->html("
                 <p style='font-size:14px; color:#333;'>
-                Hello <strong>{$user->getName()}</strong>, you have successfully logged-in on security.diakonov-it.com.ua</p>
+                Hello <strong>{$user->getName()}</strong>,
+                you have successfully logged-in on security.diakonov-it.com.ua</p>
         ");
         $this->mailer->send($email);
     }
