@@ -15,7 +15,6 @@ class UserLoggedInEventListener
     public function __construct(
         private MessageBusInterface $bus
     ) {
-
     }
 
     public function __invoke(UserLoggedInEvent $event): void
