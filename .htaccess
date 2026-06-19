@@ -1,13 +1,21 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
+# Symfony API
 RewriteCond %{REQUEST_URI} ^/backend/
 RewriteRule ^backend/(.*)$ backend/public/index.php [QSA,L]
 
-RewriteCond %{REQUEST_URI} ^/frontend/
+# Главная
+RewriteRule ^$ frontend/index.html [L]
+
+# Админка
+RewriteRule ^admin/?$ frontend/admin.html [L]
+
+# Существующие файлы фронта
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
+# Всё остальное на главную
 RewriteRule ^ frontend/index.html [L]
 </IfModule>
