@@ -33,7 +33,7 @@ The frontend is completely separated from the backend. A lightweight frontend is
 <img src="screenshots/passkey-management.jpeg" width="280" alt="Passkey management">
 
 ### Passkey authentication (Fingerprint, Face ID & Cross-device)
-<img src="screenshots/passkey-authentication.jpeg" width="400" alt="passkey-authentication">
+<img src="screenshots/passkey-authentication.jpeg" width="500" alt="passkey-authentication">
 
 
 ## Roles and permissions
