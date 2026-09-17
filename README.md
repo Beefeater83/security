@@ -27,15 +27,13 @@ The frontend is completely separated from the backend. A lightweight frontend is
 - If refresh token is expired or missing, the user must log in again.
 
 ### Authentication methods
-<img src="screenshots/authentication.jpeg" width="200" alt="Authentication methods">
+<img src="screenshots/authentication.jpeg" width="280" alt="Authentication methods">
 
 ### Passkey management
-<img src="screenshots/passkey-management.jpeg" width="200" alt="Passkey management">
+<img src="screenshots/passkey-management.jpeg" width="280" alt="Passkey management">
 
 ### Passkey authentication (Fingerprint, Face ID & Cross-device)
-<img src="screenshots/passkey-fingerprint.jpeg" height="250" alt="Fingerprint authentication" style="margin-right: 10px;">
-<img src="screenshots/passkey-face-id.png" height="250" alt="Face ID authentication" style="margin-right: 10px;">
-<img src="screenshots/passkey-cross-device.jpeg" height="250" alt="Cross-device authentication">
+<img src="screenshots/passkey-authentication.jpeg" width="400" alt="passkey-authentication">
 
 
 ## Roles and permissions
