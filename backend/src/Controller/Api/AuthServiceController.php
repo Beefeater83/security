@@ -38,6 +38,10 @@ class AuthServiceController extends AbstractController
             $response->headers->setCookie(
                 $this->cookieService->createAccessCookie($result['accessToken'])
             );
+
+            $response->headers->setCookie(
+                $this->cookieService->createRefreshCookie($result['rotatedRefreshToken'])
+            );
         }
 
         return $response;

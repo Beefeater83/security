@@ -15,15 +15,29 @@ The frontend is completely separated from the backend. A lightweight frontend is
 - GitHub authentication resolves the user's **`primary verified email`**, allowing users with private email visibility to authenticate successfully.
 - OTP authentication is available only for registered users. A **6-digit verification code** is sent to the user's email, is valid for **5 minutes**, and can be used only once.
 - Passkey authentication uses the **WebAuthn standard** and supports passwordless authentication using a device, platform authenticator, security key, or another supported passkey provider.
+- Passkey authentication also supports **cross-device authentication**, allowing users to authenticate on a device without a registered Passkey by using a Passkey from another device.
 - Authenticated users can register multiple Passkeys for their account and manage them by deleting their own registered Passkeys from the frontend.
 - Passkey credentials are stored in the database, while the private key remains on the user's device or Passkey provider.
 - After successful authentication, a custom domain event is dispatched, triggering a login notification email to the user.
 - After successful login, a JWT token is issued and stored in `HttpOnly cookies` (access + refresh flow).
 - Access token lifetime: **5 minutes**
 - Refresh token lifetime: **1 hour**
+- Refresh tokens are **rotated on each successful refresh request**.
 - Access token is automatically refreshed via `/api/refresh` when expired.
 - If refresh token is expired or missing, the user must log in again.
-- 
+
+### Authentication methods
+<img src="screenshots/authentication.jpeg" width="200" alt="Authentication methods">
+
+### Passkey management
+<img src="screenshots/passkey-management.jpeg" width="200" alt="Passkey management">
+
+### Passkey authentication (Fingerprint, Face ID & Cross-device)
+<img src="screenshots/passkey-fingerprint.jpeg" height="250" alt="Fingerprint authentication" style="margin-right: 10px;">
+<img src="screenshots/passkey-face-id.png" height="250" alt="Face ID authentication" style="margin-right: 10px;">
+<img src="screenshots/passkey-cross-device.jpeg" height="250" alt="Cross-device authentication">
+
+
 ## Roles and permissions
 - `ROLE_ADMIN` or `ROLE_TRUSTED_USER` can perform admin actions (`POST`, `PATCH`, `DELETE`).
 - ROLE_TRUSTED_USER: can perform admin actions only in the `notebook` category. Attempts on other categories return **403**

@@ -67,12 +67,15 @@ class TokenService
         }
 
         $user = $refreshToken->getUser();
-        $newAccessToken = $this->jwtManager->create($user);
+        $newAccessToken = $this->createAccessToken($user);
+        $this->refreshTokenRepository->remove($refreshToken);
+        $rotatedRefreshToken = $this->createRefreshToken($user);
 
         return [
             'success' => true,
             'data' => ['success' => true],
-            'accessToken' => $newAccessToken
+            'accessToken' => $newAccessToken,
+            'rotatedRefreshToken' => $rotatedRefreshToken
         ];
     }
 
