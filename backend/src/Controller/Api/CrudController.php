@@ -71,7 +71,7 @@ abstract class CrudController extends AbstractController
         return $this->json($paginatedResponse, Response::HTTP_OK);
     }
 
-    protected function fromJson(Request $request, $className, object $model = null, array $groups = []): object
+    protected function fromJson(Request $request, string $className, ?object $model = null, array $groups = []): object
     {
         /**
          * @var $serializer SerializerInterface
